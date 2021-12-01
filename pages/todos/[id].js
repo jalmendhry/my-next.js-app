@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // export function getStaticPaths() {
 //   return { paths: [], fallback: true }
 // }
@@ -11,14 +13,24 @@
 //   }
 // }
 
-export function getServerSideProps(ctx) {
+export async function getServerSideProps({ query }) {
+  const { id } = query;
+
+  const { data: todo } = await axios.get(
+    `https://jsonplaceholder.typicode.com/todos/${id}`
+  );
+
   return {
-    props: {},
+    props: { todo },
   };
 }
 
-const Todos = () => {
-  return <p>hello</p>;
+const Todos = ({ todo: { id, title } }) => {
+  return (
+    <p>
+      {id} - {title}
+    </p>
+  );
 };
 
 export default Todos;
