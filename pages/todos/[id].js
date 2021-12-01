@@ -1,20 +1,18 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 
-// export function getStaticPaths() {
-//   return { paths: [], fallback: true }
-// }
+export async function getStaticPaths() {
+  const paths = [
+    { params: { id: "1" } },
+    { params: { id: "2" } },
+    { params: { id: "3" } },
+  ];
 
-// export async function getStaticProps({ params }) {
-//   return {
-//     props: { todos },
+  return { paths, fallback: true };
+}
 
-//     // Incremental re-generation:
-//     unstable_revalidate: true,
-//   }
-// }
-
-export async function getServerSideProps({ query }) {
-  const { id } = query;
+export async function getStaticProps({ params }) {
+  const { id } = params;
 
   const { data: todo } = await axios.get(
     `https://jsonplaceholder.typicode.com/todos/${id}`
@@ -22,10 +20,31 @@ export async function getServerSideProps({ query }) {
 
   return {
     props: { todo },
+    revalidate: true,
   };
 }
 
-const Todos = ({ todo: { id, title } }) => {
+// export async function getServerSideProps({ query }) {
+//   const { id } = query;
+
+//   const { data: todo } = await axios.get(
+//     `https://jsonplaceholder.typicode.com/todos/${id}`
+//   );
+
+//   return {
+//     props: { todo },
+//   };
+// }
+
+const Todos = ({ todo }) => {
+  const { isFallback } = useRouter();
+
+  if (isFallback) {
+    return <p>Loading...</p>;
+  }
+
+  const { id, title } = todo;
+
   return (
     <p>
       {id} - {title}
