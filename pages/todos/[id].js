@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { todo },
-    revalidate: true,
+    revalidate: 60,
   };
 }
 
