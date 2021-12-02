@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jalmendhry1/joes-components": "^0.2.0",
     "axios": "^0.24.0",
     "next": "12.0.4",
     "qs-props": "^1.1.0",

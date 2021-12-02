@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 
+import { Joe } from "@jalmendhry1/joes-components";
+
 export async function getServerSideProps({ query, res }) {
   res.setHeader(
     "Cache-Control",
@@ -32,6 +34,7 @@ const Todos = ({ todo }) => {
       <p>
         {id} - {title}
       </p>
+      <Joe name="joe" />
       <button
         onClick={() => {
           router.push(`/todos/${id}?query=test`, undefined, {
