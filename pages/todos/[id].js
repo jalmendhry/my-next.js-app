@@ -1,14 +1,9 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 
-import { Joe } from "@jalmendhry1/joes-components";
+import { Button } from "@jalmendhry1/joes-components";
 
-export async function getServerSideProps({ query, res }) {
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=59"
-  );
-
+export async function getServerSideProps({ query }) {
   const { id } = query;
 
   const { data: todo } = await axios.get(
@@ -34,16 +29,18 @@ const Todos = ({ todo }) => {
       <p>
         {id} - {title}
       </p>
-      <Joe name="joe" />
-      <button
-        onClick={() => {
+      {/* <Joe name="joe" /> */}
+      <Button
+        size="lg"
+        handleClick={() => {
           router.push(`/todos/${id}?query=test`, undefined, {
             shallow: true,
           });
         }}
+        bgColour="orange"
       >
-        add param
-      </button>
+        Add Param
+      </Button>
     </>
   );
 };
