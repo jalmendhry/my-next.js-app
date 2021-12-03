@@ -39,7 +39,7 @@ const Todos = ({ todo }) => {
         }}
         bgColour="orange"
       >
-        Add Param
+        Add
       </Button>
     </>
   );

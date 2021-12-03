@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
+import { Button } from "@jalmendhry1/joes-components";
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <Head>
@@ -14,6 +15,18 @@ export default function Home() {
         <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <Button
+          size="lg"
+          handleClick={() => {
+            console.log("hihihi");
+          }}
+          bgColour="orange"
+          label="hi"
+        >
+          Hello world!
+        </Button>
+        {/* <Something /> */}
       </main>
 
       <footer>
@@ -30,4 +43,6 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export default Home;
